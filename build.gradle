@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '2.0'
+sourceCompatibility = '15.0.1'
+
+mainClassName = 'Get_run'
+
+jar {
+  doFirst {  from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }}
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'Jar Making Exaple',
+                "Main-Class": "$mainClassName"
+        )
+    }
+    destinationDirectory = file("$rootDir/my-jar")
+    archivesBaseName = 'LABORATORIAL'
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    testCompile group: 'io.helidon.webclient', name: 'helidon-webclient', version: '2.1.0'
+    compile group: 'com.typesafe.akka', name: 'akka-http_2.13', version: '10.2.1'
+    compile group: 'com.google.http-client', name: 'google-http-client', version: '1.38.0'
+    compile group: 'org.json', name: 'json', version: '20201115'
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.1.1.jre15-preview'
+
+}
+
+
+
