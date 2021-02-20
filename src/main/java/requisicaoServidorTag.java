@@ -21,7 +21,7 @@ public class requisicaoServidorTag {
 
         certificates certifCates = new certificates();
         String login = "mla\\gmenegue";
-        String senha = "Mosaic@2021";
+        String senha = "Mosaic@2022";
         String AuthAutorization = login + ":" + senha;
 
         String TAGCorreta = null;
@@ -32,8 +32,8 @@ public class requisicaoServidorTag {
             Date data = new Date();
             String dataAtual = formatador.format(data);
             //String startTime = "startTime=" + dataAtual + "%2000:00&";
-            String startTime = "startTime=" + dataAtual + "%2000:00:00-00&";
-            String endTime ="endTime=" + dataAtual + "%2022:00:00-00&";
+            String startTime = "startTime=" + "2021-02-19" + "%2000:00:00-00&";
+            String endTime ="endTime=" + "2021-02-19" + "%2022:00:00-00&";
 
             String startTimeBD = dataAtual + " # 00:00";
             String endTimeBD = dataAtual + " # 23:00";
@@ -80,10 +80,9 @@ public class requisicaoServidorTag {
             //Implementado
             LeitorArq leArquivo = new LeitorArq();
             String[] linhaTagsTxT = leArquivo.leitor();
-
+            String intervalo = "";
             String enderecoRequiscao = "";
-            String intervalo = "interval=1h";
-            System.out.println(intervalo);
+
 
             System.out.println("Wait till finish the process. Please don't turn off :)");
             for (int h = 0; h < leArquivo.contLinha; h++) {
@@ -97,10 +96,27 @@ public class requisicaoServidorTag {
 
 
                     if (linhaTagsTxT[h].equals(NameTag[i])) {
+                        
+                            if(linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_Fe2O3-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_P2O5-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_Fe2O3-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_P2O5-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_Fe2O3-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_P2O5-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_FINO_C_81_83_84_Fe2O3-RDB") ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_FINO_C_81_83_84_P2O5-RDB")
+                            ){
+                                 intervalo = "interval=1h";
+                                //System.out.println(intervalo);
+                            }else{
+                                 intervalo = "interval=1h";
+                               // System.out.println(intervalo);
+                            }
+
                     //linhaTagsTxT[h].equals(NameTag[i])
                          System.out.println("Tag found: " + linhaTagsTxT[h]);
                        // enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime + endTime  + "interval=1h";
-                        enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime + intervalo;//"interval=1h";
+                        enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime  +intervalo;//"interval=1h";
                         URL urlStream = new URL(enderecoRequiscao);
                         HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();
                         //startTime=2020-12-25%2000:00&endTime=2020-12-25%2012:00  --  startTime + endTime
@@ -129,8 +145,8 @@ public class requisicaoServidorTag {
 
 
                             String string = ValorTimestamp[g];
-                            String defaultTimezone = TimeZone.getDefault().getID();
-                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0000"));
+                           // String defaultTimezone = TimeZone.getDefault().getID();
+                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0200"));
                             //System.out.println("string: " + string);
                            // System.out.println("defaultTimezone: " + defaultTimezone);
                             // System.out.println("date: " + (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date));
