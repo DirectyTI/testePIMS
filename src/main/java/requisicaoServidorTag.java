@@ -33,7 +33,7 @@ public class requisicaoServidorTag {
             String dataAtual = formatador.format(data);
             //String startTime = "startTime=" + dataAtual + "%2000:00&";
             String startTime = "startTime=" + "2021-02-19" + "%2000:00:00-00&";
-            String endTime ="endTime=" + "2021-02-19" + "%2022:00:00-00&";
+            String endTime ="endTime=" + "2021-02-19" + "%2012:00:00-00&";
 
             String startTimeBD = dataAtual + " # 00:00";
             String endTimeBD = dataAtual + " # 23:00";
@@ -82,6 +82,7 @@ public class requisicaoServidorTag {
             String[] linhaTagsTxT = leArquivo.leitor();
             String intervalo = "";
             String enderecoRequiscao = "";
+            String eventWeighted = "calculationBasis=EventWeighted&";
 
 
             System.out.println("Wait till finish the process. Please don't turn off :)");
@@ -97,13 +98,13 @@ public class requisicaoServidorTag {
 
                     if (linhaTagsTxT[h].equals(NameTag[i])) {
                         
-                            if(linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_Fe2O3-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_P2O5-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_Fe2O3-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_P2O5-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_Fe2O3-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_P2O5-RDB") ||
-                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_FINO_C_81_83_84_Fe2O3-RDB") ||
+                            if(     linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_Fe2O3-RDB")           ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_CUF_P2O5-RDB")            ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_Fe2O3-RDB")            ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_P2O5-RDB")             ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_Fe2O3-RDB")        ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_GROSSO_CG_P2O5-RDB")         ||
+                                    linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_FINO_C_81_83_84_Fe2O3-RDB")  ||
                                     linhaTagsTxT[h].equals("CT-USINA_ANALISE_FRIAVEL_FINO_C_81_83_84_P2O5-RDB")
                             ){
                                  intervalo = "interval=1h";
@@ -146,7 +147,7 @@ public class requisicaoServidorTag {
 
                             String string = ValorTimestamp[g];
                            // String defaultTimezone = TimeZone.getDefault().getID();
-                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0200"));
+                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0000"));
                             //System.out.println("string: " + string);
                            // System.out.println("defaultTimezone: " + defaultTimezone);
                             // System.out.println("date: " + (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date));
