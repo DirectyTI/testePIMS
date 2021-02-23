@@ -108,13 +108,13 @@ class requisicaoServidorTagLab {
 
                         String intervalo;
                         System.out.println("Tag found: " + linhaTagsTxT[h]);
-                        if(linhaTagsTxT[h].equals("CT-PROD_BIHORARIA-OPC")){
+                        if (linhaTagsTxT[h].equals("CT-PROD_BIHORARIA-OPC")) {
 
                             intervalo = "summaryType=Maximum&summaryDuration=1h";
 
 //linhaTagsTxT[h].equals(NameTag[i])
                             // enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime + endTime  + "interval=1h";
-                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime+ "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
                             URL urlStream = new URL(enderecoRequiscao);
                             HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();
                             //startTime=2020-12-25%2000:00&endTime=2020-12-25%2012:00  --  startTime + endTime
@@ -135,7 +135,7 @@ class requisicaoServidorTagLab {
 
                             JSONArray teste = jsonObjectStream.getJSONArray("Items");
 
-                            for(int cont = 0;cont < teste.length(); cont ++){
+                            for (int cont = 0; cont < teste.length(); cont++) {
 
                                 JSONObject TagItemStream = teste.getJSONObject(cont);
                                 Valor = TagItemStream.getJSONObject("Value");
@@ -146,16 +146,12 @@ class requisicaoServidorTagLab {
 
                                 String string = TIMESTAMP;
 
-                                String valorQuePrecisa = string.substring(0,19)+"Z";
-
+                                String valorQuePrecisa = string.substring(0, 19) + "Z";
 
 
                                 String defaultTimezone = TimeZone.getDefault().getID();
                                 Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(valorQuePrecisa.replaceAll("Z$", "+0000"));
-                                String ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date);
-
-
-
+                                String ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
 
 
                                 BDconnection conn = new BDconnection();
@@ -165,10 +161,10 @@ class requisicaoServidorTagLab {
                                 PreparedStatement stm = conect.prepareStatement(sql);
 
                                 stm.setFloat(1, (float) value);
-                                stm.setString(2,startTimeBD);
-                                stm.setString(3,endTimeBD);
-                                stm.setString(4,linhaTagsTxT[h]);
-                                stm.setString(5,ValorConvertidoTimeStamp);
+                                stm.setString(2, startTimeBD);
+                                stm.setString(3, endTimeBD);
+                                stm.setString(4, linhaTagsTxT[h]);
+                                stm.setString(5, ValorConvertidoTimeStamp);
 
                                 stm.execute();
                                 conn.closeDataBaseConnection();
@@ -177,13 +173,11 @@ class requisicaoServidorTagLab {
                             }
 
 
-
-
-                        }else{
+                        } else {
                             intervalo = "summaryType=Average&summaryDuration=1h";
                             //linhaTagsTxT[h].equals(NameTag[i])
                             // enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime + endTime  + "interval=1h";
-                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime+ "calculationBasis=eventWeighted&" +  intervalo;//"interval=1h";
+                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
                             URL urlStream = new URL(enderecoRequiscao);
                             HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();
                             //startTime=2020-12-25%2000:00&endTime=2020-12-25%2012:00  --  startTime + endTime
@@ -204,19 +198,18 @@ class requisicaoServidorTagLab {
 
                             JSONArray teste = jsonObjectStream.getJSONArray("Items");
 
-                            for(int cont = 0;cont < teste.length(); cont ++){
+                            for (int cont = 0; cont < teste.length(); cont++) {
 
                                 JSONObject TagItemStream = teste.getJSONObject(cont);
                                 Valor = TagItemStream.getJSONObject("Value");
 
 
-
                                 TIMESTAMP = String.valueOf(Valor.getString("Timestamp"));
                                 //implementando
-                                if(Valor.isNull("Value")){
+                                if (Valor.isNull("Value")) {
                                     System.out.println("é nulo");
                                     value = 0.0;
-                                }else{
+                                } else {
                                     System.out.println("ñ é nulo");
                                     value = Float.valueOf(Valor.getFloat("Value"));
                                 }
@@ -225,12 +218,34 @@ class requisicaoServidorTagLab {
 
 
                                 String string = TIMESTAMP;
+                                String ValorConvertidoTimeStamp = "";
+
+                                if (linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_ANG_GR_TOT_P2O5-RDB") ||
+                                        linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_P2O5-RDB") ||
+                                        linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_CGR_Fe2O3-RDB")
+                                ) {
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0300"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+
+                                } else if (linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_ANUF_P2O5-RDB")) {
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "-0200"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+                                } else if (linhaTagsTxT[h].equals("CT-USINA_ANALISE_ULTRAFINOS_RSUF_P2O5-RDB")) {
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0200"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+                                } else if (linhaTagsTxT[h].equals("CT-USINA_ANALISE_GRANULADO_RGR_P2O5-RDB")) {
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0200"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+                                } else if (linhaTagsTxT[h].equals("CT-USINA_GRANOMETRIA_ANG GR TOT_MALHA_65-RDB")) {
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "-0100"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+                                } else{
+                                    Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0100"));
+                                    ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).format(date);
+                                }
 
                                 String defaultTimezone = TimeZone.getDefault().getID();
-                                Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0100"));
 
-
-                                String ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date);
 
                                 BDconnection conn = new BDconnection();
                                 Connection conect = conn.getConnection();
@@ -239,10 +254,10 @@ class requisicaoServidorTagLab {
                                 PreparedStatement stm = conect.prepareStatement(sql);
 
                                 stm.setFloat(1, (float) value);
-                                stm.setString(2,startTimeBD);
-                                stm.setString(3,endTimeBD);
-                                stm.setString(4,linhaTagsTxT[h]);
-                                stm.setString(5,ValorConvertidoTimeStamp);
+                                stm.setString(2, startTimeBD);
+                                stm.setString(3, endTimeBD);
+                                stm.setString(4, linhaTagsTxT[h]);
+                                stm.setString(5, ValorConvertidoTimeStamp);
 
                                 stm.execute();
                                 conn.closeDataBaseConnection();
