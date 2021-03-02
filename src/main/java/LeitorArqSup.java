@@ -1,28 +1,30 @@
+
+
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+        import java.io.BufferedWriter;
+        import java.io.FileReader;
+        import java.io.FileWriter;
+        import java.io.IOException;
+        import java.util.Scanner;
 /*
 Essa classe Lê o arquivo com as tags e salva em uma Array de strings. É usada na classe requisicaoServidorTag
 para verificar quais tags da documentação DIrecty existem no servidor.
  */
 
-public class LeitorArq {
+public class LeitorArqSup {
     public int contLinha = 0;
     public String[] leitor() throws IOException {
-        String path = "C:\\Tags\\TAGLAB.txt"; // caminho da pasta onde está as tags da documentação
+        String path = "C:\\Tags\\TAGSUPER.txt"; // caminho da pasta onde está as tags da documentação
         BufferedReader buffRead = new BufferedReader(new FileReader(path)); // Leitura do arquivo
 
         String linha = "";
 
         while (true) {
-           if(linha != null){
-               contLinha++;
-           }else {
-               break;
-           }
+            if(linha != null){
+                contLinha++;
+            }else {
+                break;
+            }
             linha = buffRead.readLine();
         }
         contLinha = contLinha-1; // esse contador está com -1 pois no final da contagem aparece 141 linhas. Na verdade são 140
