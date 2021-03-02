@@ -141,10 +141,11 @@ public class requisicaoServidorTagSup {
                             TIMESTAMP = String.valueOf(Valor.getString("Timestamp"));
                             //implementando
                             if(Valor.isNull("Value")){
-                                System.out.println("é nulo");
+
                                 value = 0.0;
+
                             }else{
-                                System.out.println("ñ é nulo");
+
                                 value = Float.valueOf(Valor.getFloat("Value"));
                             }
                             //implementando
