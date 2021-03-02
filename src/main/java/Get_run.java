@@ -8,7 +8,7 @@ public class Get_run {
         tag.TagRequisicao();
 
         requisicaoServidorTagSup tag2 = new requisicaoServidorTagSup();
-        tag2.reqSupervisorio ();
+        tag2.reqSupervisorio();
 
     }
 }
