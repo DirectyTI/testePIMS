@@ -77,7 +77,7 @@ class requisicaoServidorTagLab {
             int tamanho = arrItens.length();
 
 
-            LeitorArq leArquivo = new LeitorArq();
+            LeitorArqLab leArquivo = new LeitorArqLab ();
             String[] linhaTagsTxT = leArquivo.leitor();
 
             String enderecoRequiscao = "";

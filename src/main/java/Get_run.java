@@ -7,6 +7,9 @@ public class Get_run {
         requisicaoServidorTagLab tag = new requisicaoServidorTagLab();
         tag.TagRequisicao();
 
+        requisicaoServidorTagSup tag2 = new requisicaoServidorTagSup();
+        tag2.reqSupervisorio ();
+
     }
 }
 
