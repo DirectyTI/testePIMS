@@ -107,7 +107,30 @@ public class requisicaoServidorTagSup {
                         String intervalo;
                         System.out.println("Tag found: " + linhaTagsTxT[h]);
 
-                        intervalo = "summaryType=Average&summaryDuration=2h";
+
+
+
+                        if(linhaTagsTxT[h].equals("CT-PROD_BIHORARIA-OPC")){
+
+                            intervalo = "summaryType=Maximum&summaryDuration=2h";
+                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+
+                        }else{
+
+                             intervalo = "summaryType=Average&summaryDuration=2h";
+                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+
+                        }
+
+
+
+
+
+
+                      //  String intervalo;
+                       // System.out.println("Tag found: " + linhaTagsTxT[h]);
+
+                      //  intervalo = "summaryType=Average&summaryDuration=2h";
                         //linhaTagsTxT[h].equals(NameTag[i])
                         // enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "interpolated?" + startTime + endTime  + "interval=1h";
                         enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime  +  intervalo;//"interval=1h";
@@ -124,13 +147,14 @@ public class requisicaoServidorTagSup {
                         lineStream = inStream.readLine();
 
                         JSONObject jsonObjectStream = new JSONObject(lineStream);
-                        JSONObject Valor = new JSONObject();
+
+
 
                         String TIMESTAMP = "";
                         double value = 0;
 
                         JSONArray teste = jsonObjectStream.getJSONArray("Items");
-
+                        JSONObject Valor = new JSONObject();
                         for(int cont = 0;cont < teste.length(); cont ++){
 
                             JSONObject TagItemStream = teste.getJSONObject(cont);
@@ -153,12 +177,12 @@ public class requisicaoServidorTagSup {
 
 
                             String string = TIMESTAMP;
+                            String valorQuePrecisa = TIMESTAMP.substring(0, 19) + "Z";
+                            String ValorConvertidoTimeStamp = "";
 
                             String defaultTimezone = TimeZone.getDefault().getID();
-                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(string.replaceAll("Z$", "+0000"));
-
-
-                            String ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date);
+                            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", new Locale("pt", "BR"))).parse(valorQuePrecisa.replaceAll("Z$", "+0000"));
+                             ValorConvertidoTimeStamp = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",  new Locale("pt", "BR"))).format(date);
 
                             BDconnection conn = new BDconnection();
                             Connection conect = conn.getConnection();

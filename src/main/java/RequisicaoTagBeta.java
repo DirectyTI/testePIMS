@@ -104,18 +104,10 @@ class requisicaoServidorTagLab {
                         /*# REALIZAR TESTES COM O CÓDIGO ABAIXO*/
 
 
-                        if(linhaTagsTxT[h].equals("CT-PROD_BIHORARIA-OPC")){
-
-                        intervalo = "summaryType=Maximum&summaryDuration=1h";
-                        enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
-
-                        }else{
-
                         intervalo = "summaryType=Average&summaryDuration=1h";
                         enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
 
-                        }
-                            URL urlStream = new URL(enderecoRequiscao);
+                        URL urlStream = new URL(enderecoRequiscao);
                             HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();
 
                             connectionStream.setRequestProperty("Authorization", authHeaderValue);
