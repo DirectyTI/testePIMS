@@ -4,12 +4,32 @@ public class Get_run {
 
     public static void main(String[] args) throws IOException {
 
-        requisicaoServidorTagLab tag = new requisicaoServidorTagLab();
-        tag.TagRequisicao();
+        new Thread(Laboratorial).start();
+        new Thread(Supervisorio).start();
 
-        requisicaoServidorTagSup tag2 = new requisicaoServidorTagSup();
-        tag2.reqSupervisorio();
 
     }
+
+
+    /*
+    * implementando thread
+    * */
+
+    private static Runnable Laboratorial = new Runnable() {
+        @Override
+        public void run() {
+            requisicaoServidorTagLab tag = new requisicaoServidorTagLab();
+            tag.TagRequisicao();
+        }
+    };
+
+    private static Runnable Supervisorio = new Runnable() {
+        @Override
+        public void run() {
+            requisicaoServidorTagSup tag2 = new requisicaoServidorTagSup();
+            tag2.reqSupervisorio();
+        }
+    };
+
 }
 
