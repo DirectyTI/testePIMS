@@ -1,15 +1,23 @@
+/*
+    Classe responsável por criar uma conexão com banco de dados.
+ */
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BDconnection {
 
+    //interface Java para execução de comandos SQL.
     private Connection connection;
 
     public  BDconnection(){
 
         try{
+            //string de coexão
             String ConnectionDB = "jdbc:sqlserver://TR1SQLPRD1:1433;databaseName=PBI_PIMS_CMT;user=PBIPIMS;password=Pbi@Pims2021";
+            //Driver de conexão
             connection = DriverManager.getConnection(ConnectionDB);
 
         } catch (SQLException throwables) {
@@ -17,10 +25,12 @@ public class BDconnection {
         }
     }
 
+    //Método que abre conexão com o banco de dados.
     public Connection getConnection(){
         return this.connection;
     }
 
+    //Método que fecha a conexão com o banco de dados.
     public void closeDataBaseConnection(){
         try{
             connection.close();
@@ -29,23 +39,3 @@ public class BDconnection {
         }
     }
 }
-
-
-
-/*
-2. Servidor do SQL
-TR1SQLPRD1
-10.96.33.15
-3. String de conexão
-Created the bank PBI_PIMS_CMT
-and User PBIPIMS
-with pass: c
-as dbowner from PBI_PIMS_CMT
- */
-/*
-String connectionUrl = "jdbc:sqlserver://<server>:<port>;databaseName=AdventureWorks;user=<user>;password=<password>";
-
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement();) {
-            String SQL = "SELECT TOP 10 * FROM Person.Contact";
-            ResultSet rs = stmt.executeQuery(SQL);
- */

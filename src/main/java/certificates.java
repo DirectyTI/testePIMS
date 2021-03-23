@@ -3,6 +3,10 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
+/*
+* Esta Classe é responsável pelos certificados HTTP
+* */
+
 public class certificates {
     public void certificateS() throws NoSuchAlgorithmException, KeyManagementException {
         // Create a trust manager that does not validate certificate chains
