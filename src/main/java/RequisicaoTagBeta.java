@@ -39,7 +39,7 @@ class requisicaoServidorTagLab {
             String endTimeBD = dataAtual + " # 23:00";
 
             certifCates.certificateS();
-            URL url = new URL("https://pivision.mosaicco.com/piwebapi/dataservers/F1DSJNMH3B1lQke4iGxscSM3VgQlJDTVRTUlYxMQ/points?selectedFields=Items.WebId;Items.Name;Items.Path;Items.Descriptor;Items.PointType&maxCount=10000");
+            URL url = new URL("https://pivisionciu.mosaicco.com/piwebapi/dataservers/F1DSJNMH3B1lQke4iGxscSM3VgQlJDTVRTUlYxMQ/points?selectedFields=Items.WebId;Items.Name;Items.Path;Items.Descriptor;Items.PointType&maxCount=10000");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             String AuthCode = Base64.getEncoder().encodeToString((AuthAutorization).getBytes("UTF-8"));
@@ -105,7 +105,7 @@ class requisicaoServidorTagLab {
 
 
                         intervalo = "summaryType=Average&summaryDuration=1h";
-                        enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+                        enderecoRequiscao = "https://pivisionciu.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
 
                         URL urlStream = new URL(enderecoRequiscao);
                             HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();

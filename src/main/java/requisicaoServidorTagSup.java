@@ -48,7 +48,7 @@ public class requisicaoServidorTagSup {
 
             certifCates.certificateS();
             //Url de requisição
-            URL url = new URL("https://pivision.mosaicco.com/piwebapi/dataservers/F1DSJNMH3B1lQke4iGxscSM3VgQlJDTVRTUlYxMQ/points?selectedFields=Items.WebId;Items.Name;Items.Path;Items.Descriptor;Items.PointType&maxCount=10000");
+            URL url = new URL("https://pivisionciu.mosaicco.com/piwebapi/dataservers/F1DSJNMH3B1lQke4iGxscSM3VgQlJDTVRTUlYxMQ/points?selectedFields=Items.WebId;Items.Name;Items.Path;Items.Descriptor;Items.PointType&maxCount=10000");
 
             //Abrindo a conexão
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -137,12 +137,12 @@ public class requisicaoServidorTagSup {
                         if(linhaTagsTxT[h].equals("CT-PROD_BIHORARIA-OPC")){
 
                             intervalo = "summaryType=Maximum&summaryDuration=2h";
-                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+                            enderecoRequiscao = "https://pivisionciu.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
 
                         }else{
 
                              intervalo = "summaryType=Average&summaryDuration=2h";
-                            enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
+                            enderecoRequiscao = "https://pivisionciu.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?" + startTime + "calculationBasis=eventWeighted&" + intervalo;//"interval=1h";
 
                         }
 
