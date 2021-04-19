@@ -147,7 +147,7 @@ public class requisicaoServidorTagSup {
                         }
 
                         //Nova url para trazer as informações
-                        enderecoRequiscao = "https://pivision.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime  +  intervalo;//"interval=1h";
+                        enderecoRequiscao = "https://pivisionciu.mosaicco.com/piwebapi/streams/" + WEBID[i] + "/" + "summary?selectedFields=Items.Value&" + startTime  +  intervalo;//"interval=1h";
                         URL urlStream = new URL(enderecoRequiscao);
                         HttpURLConnection connectionStream = (HttpURLConnection) urlStream.openConnection();
 
