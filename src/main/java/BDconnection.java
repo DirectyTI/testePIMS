@@ -16,7 +16,7 @@ public class BDconnection {
 
         try{
             //string de coexão
-            String ConnectionDB = "jdbc:sqlserver://TR1SQLPRD1:1433;databaseName=PBI_PIMS_CMT;user=PBIPIMS;password=Pbi@Pims2021";
+            String ConnectionDB = "jdbc:sqlserver://TR1SQLPRD1:1433;databaseName=PBI_PIMS_CMT;user=PBIPIMS;password=$vY#e&Rvzx";
             //Driver de conexão
             connection = DriverManager.getConnection(ConnectionDB);
 
