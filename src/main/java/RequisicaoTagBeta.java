@@ -23,7 +23,7 @@ class requisicaoServidorTagLab {
 
         certificates certifCates = new certificates();
         String login = "mla\\gmenegue";
-        String senha = "Mosaic@2022";
+        String senha = "Mosaic@2023";
         String AuthAutorization = login + ":" + senha;
         String TAGCorreta = null;
 
