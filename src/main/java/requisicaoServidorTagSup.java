@@ -26,7 +26,7 @@ public class requisicaoServidorTagSup {
 
         certificates certifCates = new certificates(); //Instancia dos certificados HTTP
         String login = "mla\\gmenegue"; //Login de autorização da requisição
-        String senha = "Mosaic@2022";   //Senha de autorização da requisição
+        String senha = "Mosaic@2023";   //Senha de autorização da requisição
         String AuthAutorization = login + ":" + senha; //String completa de da requisição
 
         String TAGCorreta = null;
