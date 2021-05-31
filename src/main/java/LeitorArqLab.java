@@ -12,7 +12,7 @@ para verificar quais tags da documentação DIrecty existem no servidor.
 public class LeitorArqLab {
     public int contLinha = 0;
     public String[] leitor() throws IOException {
-        String path = "C:\\Tags\\TAGLAB.txt"; // caminho da pasta onde está as tags da documentação
+        String path = "C:\\ProjetoPims\\WebServiceTapria\\TAGLAB.txt"; // caminho da pasta onde está as tags da documentação
         BufferedReader buffRead = new BufferedReader(new FileReader(path)); // Leitura do arquivo
 
         String linha = "";
