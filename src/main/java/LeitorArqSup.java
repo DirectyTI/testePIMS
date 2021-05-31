@@ -14,7 +14,7 @@ para verificar quais tags da documentação DIrecty existem no servidor.
 public class LeitorArqSup {
     public int contLinha = 0;
     public String[] leitor() throws IOException {
-        String path = "C:\\Tags\\TAGSUPER.txt"; // caminho da pasta onde está as tags da documentação
+        String path = "C:\\ProjetoPims\\WebServiceTapria\\TAGSUPER.txt"; // caminho da pasta onde está as tags da documentação
         BufferedReader buffRead = new BufferedReader(new FileReader(path)); // Leitura do arquivo
 
         String linha = "";
